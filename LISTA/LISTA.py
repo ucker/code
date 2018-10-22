@@ -43,7 +43,7 @@ class Net(nn.Module):
 
     def forward(self, x):
         z = softshrink(F.linear(x, self.W), self.theta)
-        for i in range(1):
+        for i in range(5):
             z = softshrink(F.linear(x, self.W) + F.linear(z, self.S), self.theta)
         return z
 
@@ -63,7 +63,6 @@ def train(model, train_loader, optimizer, epoch):
 
 def predict_sparse_code(model, test_loader):
     model.eval()
-    correct = 0
     output_res = []
     with torch.no_grad():
         for data, target in test_loader:
@@ -98,7 +97,7 @@ def solve():
     model = Net(opti_Wd.shape[0], opti_Wd.shape[1], opti_Wd, L)
     optimizer = optim.SGD(model.parameters(), lr=0.1)
     print("Training LISTA...")
-    for epoch in range(1, 20 + 1):
+    for epoch in range(1, 150 + 1):
         train(model, train_loader, optimizer, epoch)
         # get sparse code of test data
     new_sparse_code = predict_sparse_code(model, test_loader)
