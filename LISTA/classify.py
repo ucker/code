@@ -26,5 +26,5 @@ print("Learning classifier for sparse code...")
 clf = LogisticRegression(random_state=0, solver='lbfgs',
                          multi_class='multinomial').fit(data_train_pre, label_train)
 
-print("LISTA+Logistic Regression ERROR: " + str(clf.score(data_test_pre, label_test)))
-print("Logistic Regression ERROR: " + str(wine_classification(data, label)))
+print("LISTA+Logistic Regression SCORE: " + str(clf.score(data_test_pre, label_test)))
+print("Logistic Regression SCORE: " + str(wine_classification(data, label)))
